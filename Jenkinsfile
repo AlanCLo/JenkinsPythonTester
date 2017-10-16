@@ -4,9 +4,9 @@ pipeline {
         stage('build') {
             steps {
                 sh 'python --version'
-                pip install -r requirements.txt
-                python manage.py migrate
-                python manage.py loaddata blahapp
+                sh 'pip install -r requirements.txt'
+                sh 'python manage.py migrate'
+                sh 'python manage.py loaddata blahapp'
             }
         }
     }
