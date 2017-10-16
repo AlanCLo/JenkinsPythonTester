@@ -1,0 +1,17 @@
+{% extends 'blahapp/base.html' %}
+
+
+{% block content %}
+	<h1>New Cat</h1>
+	<form method="POST" class="cat-form">{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" class="save btn btn-default">Save</button>
+		{% if form.instance.pk %}
+			<a href="{% url 'cat_delete' pk=form.instance.pk %}"><span class="btn btn-default">Delete</span></a>
+			<a href="{% url 'cat_detail' pk=form.instance.pk %}"><span class="btn btn-default">Cancel</span></a>
+		{% else %}
+			<a href="{% url 'cat_list' %}"><span class="btn btn-default">Cancel</span></a>
+		{% endif %}
+	</form>
+
+{% endblock %}
