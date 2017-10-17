@@ -3,7 +3,10 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'sh JenkinsBuild.sh'
+				sh 'python --version'
+				sh 'pip install -r requirements.txt'
+				sh 'python manage.py migrate'
+				sh 'python manage.py loaddata blahapp'
             }
         }
     }
