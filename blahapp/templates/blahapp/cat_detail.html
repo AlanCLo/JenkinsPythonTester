@@ -5,7 +5,9 @@
 		<div class="date">
 			{{ cat.created_date }}
 		</div>
-		<a class="btn btn-default" href="{% url 'cat_edit' pk=cat.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+		{% if user.is_authenticated %}
+			<a class="btn btn-default" href="{% url 'cat_edit' pk=cat.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+		{% endif %}
 		<h1>{{ cat.name }}</h1>
 		<p>Pet of {{ cat.owner.name }}</p>
 	</div>
