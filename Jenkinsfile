@@ -16,7 +16,6 @@ pipeline {
             }
         }
 		stage('build-container') {
-			def app 
 			app = docker.build("alan/blahapp")	
 			app.inside {
 				sh 'echo hello'
