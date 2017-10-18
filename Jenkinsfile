@@ -1,5 +1,4 @@
 pipeline {
-	def app
 	agent none
     stages {
         stage('build') {
@@ -17,9 +16,8 @@ pipeline {
             }
         }
 		stage('build-container') {
+			def app 
 			app = docker.build("alan/blahapp")	
-		}
-		stage('test-container') {
 			app.inside {
 				sh 'echo hello'
 			}
