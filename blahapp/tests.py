@@ -39,3 +39,6 @@ class CatViewTestCase(TestCase):
 		self.assertIn("lion", resp.content)
 
 
+
+
+
