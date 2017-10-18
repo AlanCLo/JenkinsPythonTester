@@ -16,10 +16,7 @@ pipeline {
             }
         }
 		stage('build-container') {
-			app = docker.build("alan/blahapp")	
-			app.inside {
-				sh 'echo hello'
-			}
+			docker.build("alan/blahapp")	
 		}
     }
 }
