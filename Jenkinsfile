@@ -14,5 +14,15 @@ pipeline {
 				archive 'htmlcov/*'
             }
         }
+		stage('build-image') {
+			agent {
+				docker {
+					image 'python:2.7.10'
+				}
+			}
+			steps {
+				sh 'ls'
+			}
+		}
     }
 }
