@@ -9,6 +9,9 @@ pipeline {
         stage('build') {
             steps {
 				sh 'sh JenkinsBuild.sh'
+				sh 'coverage run manage.py test blahapp -v 2'
+				sh 'coverage html'
+
             }
         }
     }
