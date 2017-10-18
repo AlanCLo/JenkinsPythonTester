@@ -16,7 +16,10 @@ pipeline {
             }
         }
 		stage('build-container') {
-			docker.build("alan/blahapp")	
+			agent { dockerfile true }
+			steps {
+				sh 'coverage run manage.py test blahapp -v 2'
+			}
 		}
     }
 }
