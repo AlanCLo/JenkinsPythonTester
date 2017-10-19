@@ -127,7 +127,7 @@ STATIC_URL = '/static/'
 
 
 if not os.environ.get('ALLOWED_HOST') is None:
-    ALLOWED_HOSTS.append(os.environ.get('ALLOWED_HOST'))
+    ALLOWED_HOSTS += os.environ.get('ALLOWED_HOST').split(" ")
 
 
 print ALLOWED_HOSTS
