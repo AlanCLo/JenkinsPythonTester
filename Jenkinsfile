@@ -29,14 +29,9 @@ pipeline {
 			when {
 				expression { currentBuild.result == null || currentBUild.result == 'SUCCESS' }
 			}
-			agent {
-				docker {
-					image 'alan/blahapp'
-					args '-u root -p 33000:8000'
-				}
-			}
+			agent any
 			steps {
-				sh 'ps aux | grep python'
+				sh 'docker run -d -it -p 33000:8000 --name=blahappdeployed alan/blahapp'
 			}
 		}
     }
