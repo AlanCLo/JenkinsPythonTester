@@ -30,7 +30,10 @@ pipeline {
 				expression { currentBuild.result == null || currentBUild.result == 'SUCCESS' }
 			}
 			agent {
-				image 'alan/blahapp'
+				docker {
+					image 'alan/blahapp'
+					args '-u root -p 33000:8000'
+				}
 			}
 			steps {
 				sh 'ps aux | grep python'
