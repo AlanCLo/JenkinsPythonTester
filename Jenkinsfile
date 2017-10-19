@@ -32,6 +32,9 @@ pipeline {
 			agent {
 				image 'alan/blahapp'
 			}
+			steps {
+				sh 'ps aux | grep python'
+			}
 		}
     }
 }
