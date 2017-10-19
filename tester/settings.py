@@ -123,3 +123,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+
+if not os.environ.get('ALLOWED_HOST') is None:
+    ALLOWED_HOSTS.append(os.environ.get('ALLOWED_HOST'))
+
+
+print ALLOWED_HOSTS
+

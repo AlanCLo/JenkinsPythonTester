@@ -23,6 +23,7 @@ pipeline {
 			}
 			steps {
 				sh 'coverage run manage.py test blahapp -v 2'
+				sh 'ip -4 route get 8.8.8.8 | awk {'print $7'} | tr -d "\n"'
 			}
 		}
 		stage('deploy') {
@@ -31,7 +32,8 @@ pipeline {
 			}
 			agent any
 			steps {
-				sh 'docker run -d -it -p 33000:8000 --name=blahappdeployed alan/blahapp'
+				sh 'docker stop blahappdeployed || true && docker rm blahappdeployed || true'
+				sh 'docker run -d -it -p 33000:8000 -e ALLOWED_HOST `ip -4 route get 8.8.8.8 | awk {'print $7'} | tr -d "\n"` --name=blahappdeployed alan/blahapp'
 			}
 		}
     }
