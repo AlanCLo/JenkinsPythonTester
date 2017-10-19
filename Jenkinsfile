@@ -32,7 +32,7 @@ pipeline {
 			agent any
 			steps {
 				sh 'docker stop blahappdeployed || true && docker rm blahappdeployed || true'
-				sh 'docker run -d -it -p 33000:8000 -e ALLOWED_HOST=`hostname -I` --name=blahappdeployed alan/blahapp'
+				sh 'docker run -d -it -p 33000:8000 -e ALLOWED_HOST="`hostname -I`" --name=blahappdeployed alan/blahapp'
 			}
 		}
     }
