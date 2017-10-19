@@ -36,4 +36,11 @@ pipeline {
 			}
 		}
     }
+	post {
+		always {
+			echo 'Cleaning up those <none> images made by the build stage'
+			sh 'docker rmi $(docker images -q -f dangling=true)'
+
+		}
+	}
 }
