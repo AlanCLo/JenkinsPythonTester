@@ -18,7 +18,7 @@ pipeline {
 		stage('build-container') {
 			agent { 
 				dockerfile true 
-				label 'alan/blahapp'
+				additionalBuildArgs '-t alan/blahapp'
 			}
 			steps {
 				sh 'coverage run manage.py test blahapp -v 2'
