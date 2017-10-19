@@ -40,6 +40,9 @@ docker image remove python:2.7.10 localhost:5000/python.2.7.10
 docker pull localhost:5000/python:2.7.10
 
 
+=====
+#Clean up
+docker rmi $(docker images -q -f dangling=true)
 
 
 """

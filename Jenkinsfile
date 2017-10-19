@@ -13,8 +13,6 @@ pipeline {
 				sh 'coverage run manage.py test blahapp -v 2'
 				sh 'coverage html'
 				archive 'htmlcov/*'
-				echo 'Cleaning up those <none> images made by the build stage'
-				sh 'docker rmi $(docker images -q -f dangling=true)'
             }
         }
 		stage('build-container') {
