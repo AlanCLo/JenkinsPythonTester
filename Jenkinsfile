@@ -14,6 +14,12 @@ pipeline {
 				sh 'coverage html'
 				archive 'htmlcov/*'
             }
+			post {
+				always {
+					echo 'Cleaning up those <none> images made by the build stage'
+					sh 'docker rmi $(docker images -q -f dangling=true)'
+				}
+			}
         }
 		stage('build-container') {
 			agent { 
@@ -36,12 +42,4 @@ pipeline {
 			}
 		}
     }
-	post {
-		always {
-			node {
-				echo 'Cleaning up those <none> images made by the build stage'
-				sh 'docker rmi $(docker images -q -f dangling=true)'
-			}
-		}
-	}
 }
