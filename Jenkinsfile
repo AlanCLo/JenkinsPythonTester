@@ -25,5 +25,13 @@ pipeline {
 				sh 'coverage run manage.py test blahapp -v 2'
 			}
 		}
+		stage('deploy') {
+			when {
+				expression { currentBuild.result == null || currentBUild.result == 'SUCCESS' }
+			}
+			agent {
+				image 'alan/blahapp'
+			}
+		}
     }
 }
