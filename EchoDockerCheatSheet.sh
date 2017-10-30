@@ -44,5 +44,27 @@ docker pull localhost:5000/python:2.7.10
 #Clean up
 docker rmi $(docker images -q -f dangling=true)
 
+docker volume rm $(docker volume ls -qf dangling=true)
+
+
+
+====
+# Volumes, backup and restore
+
+docker volume create --name pgdata
+
+# mounting a postgres
+docker run --name postgres -v pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=admin123 -d postgres
+
+# back it up
+docker run -it -v pgdata:/volume -v `pwd`/bak:/backup alpine tar -cjf /backup/some_archive.tar.bz2 -C /volume ./
+
+# restore to new volume
+docker volume create --name another
+docker run -it -v another:/volume -v `pwd`/bak:/backup alpine sh -c "rm -rf /volume/*; tar -C /volume/ -xjf /backup/some_archive.tar.bz2"
+
+
+
+
 
 """
