@@ -130,5 +130,7 @@ if not os.environ.get('ALLOWED_HOST') is None:
     ALLOWED_HOSTS += os.environ.get('ALLOWED_HOST').split(" ")
 
 
-print ALLOWED_HOSTS
-
+try:
+	from blahapp.local_settings import *
+except ImportError:
+	logging.warning("No local_settings file found.")
