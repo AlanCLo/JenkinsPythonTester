@@ -133,4 +133,4 @@ if not os.environ.get('ALLOWED_HOST') is None:
 try:
 	from blahapp.local_settings import *
 except ImportError:
-	logging.warning("No local_settings file found.")
+	print "No local_settings file found."
