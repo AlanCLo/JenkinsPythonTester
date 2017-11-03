@@ -35,9 +35,7 @@ pipeline {
 			steps {
 				sh 'docker stop blahappdeployed || true && docker rm blahappdeployed || true'
 				sh 'docker run -d -it -p 33000:8000 -e ALLOWED_HOST="`hostname -I`" --name=blahappdeployed alan/blahapp'
-				sh '. $BLAHAPP_PROD_PROFILE'
-				sh 'echo $DB_NAME'
-				sh 'eval echo \"$(< tester/local_settings_template.py)\" | docker exec -i blahappdeployed /bin/bash -c "cat > tester/local_settings.py"'
+				sh 'docker cp $BLAHAPP_PROD_SETTINGS blahappdeployed:tester/local_settings.py'
 				sh 'docker stop blahappdeployed && docker start blahappdeployed'
 			}
 		}
