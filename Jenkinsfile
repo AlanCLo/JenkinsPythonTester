@@ -35,8 +35,8 @@ pipeline {
 			steps {
 				sh 'docker stop blahappdeployed || true && docker rm blahappdeployed || true'
 				sh 'docker run -d -it -p 33000:8000 -e ALLOWED_HOST="`hostname -I`" --name=blahappdeployed alan/blahapp'
-				// Use envdir to setup all the variables for prod
-				sh 'envdir $BLAHAPP_PROD /bin/sh -c \'eval echo \"$(< tester/local_settings_template.py)\"\' | docker exec -i blahappdeployed /bin/bash -c "cat > tester/local_settings.py"'
+				// Make sure the Jenkins node has the vars in environment
+				sh 'eval echo \"$(< tester/local_settings_template.py)\" | docker exec -i blahappdeployed /bin/bash -c "cat > tester/local_settings.py"'
 				sh 'docker stop blahappdeployed && docker start blahappdeployed'
 			}
 		}
