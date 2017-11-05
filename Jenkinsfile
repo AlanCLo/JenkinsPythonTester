@@ -15,8 +15,8 @@ pipeline {
 					sh 'coverage run manage.py test blahapp -v 2'
 					sh 'coverage html'
 					archive 'htmlcov/*'
-			  }
-		  }
+				}
+		}
 		stage('build-container') {
 			agent { 
 				dockerfile {
