@@ -28,7 +28,6 @@ pipeline {
 			}
 		}
 		stage('approve') {
-			echo '${env.BUILD_URL}input/'
 			input 'Deploy to prod?'
 		}
 		stage('deploy') {
