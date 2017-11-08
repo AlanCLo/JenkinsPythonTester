@@ -6,7 +6,7 @@ node {
 		docker.build('alan/blahapp')
 	}
 	stage ('Test') {
-		docker.image('alan/blahapp').withRun('-u root') {
+		docker.image('alan/blahapp').withRun('-u root').inside {
 			stage ('Setup tests') {
 				sh 'pwd'
 				sh 'python --version'
@@ -16,6 +16,9 @@ node {
 			stage ('Run tests') {
 				sh 'coverage run manage.py test blahapp -v 2'
 				sh 'coverage html'
+			}
+			stage ('Archive results') {
+				archive (includes: 'htmlcov/*')
 			}
 		}
 	}
