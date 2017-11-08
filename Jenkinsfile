@@ -6,7 +6,7 @@ node {
 		docker.build('alan/blahapp')
 	}
 	stage ('Test') {
-		docker.image('alan/blahapp').withRun('-u root').inside {
+		docker.image('alan/blahapp').inside('-u root') {
 			stage ('Setup tests') {
 				sh 'pwd'
 				sh 'python --version'
