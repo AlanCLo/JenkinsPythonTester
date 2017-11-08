@@ -22,6 +22,9 @@ node {
 			}
 		}
 	}
+	stage ('QA') {
+		sh 'echo $BLAHAPP_PROD_SETTINGS'		
+	}
 }
 
 
