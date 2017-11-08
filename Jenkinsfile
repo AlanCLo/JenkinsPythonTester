@@ -23,7 +23,8 @@ node {
 		}
 	}
 	stage ('QA') {
-		sh 'echo $BLAHAPP_PROD_SETTINGS'		
+		sh 'echo "$BLAHAPP_PROD_SETTINGS"'
+		sh 'echo "${env.BUILD_URL}"'
 	}
 }
 
