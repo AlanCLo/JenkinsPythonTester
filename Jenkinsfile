@@ -27,6 +27,10 @@ pipeline {
 				sh 'coverage run manage.py test blahapp -v 2'
 			}
 		}
+		stage('approve') {
+			echo '${env.BUILD_URL}input/'
+			input 'Deploy to prod?'
+		}
 		stage('deploy') {
 			when {
 				expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
