@@ -24,10 +24,13 @@ node {
 		}
 	}
 */
-	stage ('QA') {
-		undeploy(BLAHAPP_QA_SETTINGS)
-		deploy(BLAHAPP_QA_SETTINGS)
-		//sh 'echo "$BLAHAPP_PROD_SETTINGS"'
+	if (BRANCH_NAME == "master") {
+		stage ('QA') {
+			undeploy(BLAHAPP_QA_SETTINGS)
+			deploy(BLAHAPP_QA_SETTINGS)
+		}
+
+//sh 'echo "$BLAHAPP_PROD_SETTINGS"'
 		//sh 'echo "${BRANCH_NAME}"'
 		
 	}
