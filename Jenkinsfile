@@ -1,6 +1,5 @@
 #!groovy
 
-/*
 node {
 	stage ('Build') {
 		checkout scm
@@ -24,7 +23,6 @@ node {
 		}
 	}
 }
-*/
 
 if (BRANCH_NAME == "master") {
 	node {
@@ -33,18 +31,7 @@ if (BRANCH_NAME == "master") {
 			deploy(BLAHAPP_QA_SETTINGS)
 		}
 	}
-	try {
-		timeout(time:5, unit: 'MINUTES') {
-			input: "Deploy to production?"
-		}
-	}
-	catch (err) {
-		def user = err.getCauses()[0].getUser()
-		if (user.toString() == 'SYSTEM') {
-			echo "System timeout"
-			currentBuild.result = 'FAILURE'	
-		}
-	}
+	timeout(time:30, unit: 'MINUTES') {
 	node {
 		stage ('Production') {
 			undeploy(BLAHAPP_PROD_SETTINGS)
