@@ -1,6 +1,7 @@
 #!groovy
 
 node {
+/*
 	stage ('Build') {
 		checkout scm
 		docker.build('alan/blahapp')
@@ -22,6 +23,7 @@ node {
 			}
 		}
 	}
+*/
 	stage ('QA') {
 		deploy(BLAHAPP_PROD_SETTINGS)
 		//sh 'echo "$BLAHAPP_PROD_SETTINGS"'
@@ -31,7 +33,7 @@ node {
 }
 
 def deploy(settings) {
-	sh 'docker run -d -it -p `cat $settings/PORT`:8000 -e ALLOWED_HOST="`hostname -I`" --name=`cat $settings/NAME` alan/blahapp'
+	sh "docker run -d -it -p `cat $settings/PORT`:8000 -e ALLOWED_HOST="`hostname -I`" --name=`cat $settings/NAME` alan/blahapp"
 	sh 'docker cp `cat $settings`/local_settings.py `cat $settings/NAME`:/usr/src/blahapp/tester/local_settings.py'
 	sh 'docker exec `cat $settings/NAME` touch /usr/src/blahapp/tester/settings.py'
 }
