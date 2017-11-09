@@ -29,6 +29,7 @@ if (BRANCH_NAME == "master") {
 		stage ('QA') {
 			undeploy(BLAHAPP_QA_SETTINGS)
 			deploy(BLAHAPP_QA_SETTINGS)
+			echo "Use SSH tunnel: ssh ubuntu@<server> -L <local_port>:<server>:`cat $BLAHAPP_QA_SETTINGS/PORT` -N"
 		}
 	}
 	timeout(time:30, unit: 'MINUTES') {
