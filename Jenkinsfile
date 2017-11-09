@@ -31,7 +31,7 @@ if (BRANCH_NAME == "master") {
 			deploy(BLAHAPP_QA_SETTINGS)
 		}
 	}
-	timeout(time:30, unit: 'MINUTES') {
+	input "Deploy to production?"
 	node {
 		stage ('Production') {
 			undeploy(BLAHAPP_PROD_SETTINGS)
