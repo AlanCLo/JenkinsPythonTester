@@ -1,7 +1,7 @@
 #!groovy
 
-node {
 /*
+node {
 	stage ('Build') {
 		checkout scm
 		docker.build('alan/blahapp')
@@ -23,18 +23,26 @@ node {
 			}
 		}
 	}
+}
 */
-	if (BRANCH_NAME == "master") {
+
+if (BRANCH_NAME == "master") {
+	node {
 		stage ('QA') {
 			undeploy(BLAHAPP_QA_SETTINGS)
 			deploy(BLAHAPP_QA_SETTINGS)
 		}
-
-//sh 'echo "$BLAHAPP_PROD_SETTINGS"'
-		//sh 'echo "${BRANCH_NAME}"'
-		
+	}
+	input "Deploy to prod?"
+	node {
+		stage ('Production') {
+			undeploy(BLAHAPP_PROD_SETTINGS)
+			deploy(BLAHAPP_PROD_SETTINGS)
+		}
 	}
 }
+
+
 
 def deploy(settings) {
 	sh "docker run -d -it -p `cat $settings/PORT`:8000 -e ALLOWED_HOST=\"`hostname -I`\" --name=`cat $settings/NAME` alan/blahapp"
