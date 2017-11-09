@@ -33,8 +33,17 @@ if (BRANCH_NAME == "master") {
 			deploy(BLAHAPP_QA_SETTINGS)
 		}
 	}
-	timeout(time:1, unit: 'DAYS') {
-		input: "Deploy to production?"
+	try {
+		timeout(time:5, unit: 'MINUTES') {
+			input: "Deploy to production?"
+		}
+	}
+	catch (err) {
+		def user = err.getCauses()[0].getUser()
+		if (user.toString() == 'SYSTEM') {
+			echo "System timeout"
+			currentBuild.result = 'FAILURE'	
+		}
 	}
 	node {
 		stage ('Production') {
