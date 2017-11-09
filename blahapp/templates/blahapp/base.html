@@ -5,6 +5,18 @@
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
 		<link rel="stylesheet" href="{% static 'css/blahapp.css' %}">
+		<style type="text/css">
+			body:before {
+				display: block;
+				line-height: 35px;
+				text-align: center;
+				font-weight: bold;
+				text-transform: uppercase;
+				color: white;
+				content: "{{ INSTANCE_LABEL }}";
+				background-color: {{ INSTANCE_COLOR }};
+			}
+		</style>
 	</head>
 
 	<body>

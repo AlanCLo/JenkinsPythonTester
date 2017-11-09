@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+				'tester.context_processors.from_settings',
             ],
         },
     },
@@ -124,6 +125,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+INSTANCE_LABEL="DEV"
+INSTANCE_COLOR="Green"
 
 
 if not os.environ.get('ALLOWED_HOST') is None:

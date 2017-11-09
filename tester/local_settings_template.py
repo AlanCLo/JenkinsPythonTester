@@ -8,3 +8,6 @@ DATABASES = {
         'PORT': '$DB_PORT',
     }
 }
+
+INSTANCE_LABEL='TESTING'
+INSTANCE_COLOR='Orange'
