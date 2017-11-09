@@ -23,8 +23,7 @@ node {
 		}
 	}
 	stage ('QA') {
-		deploy($BLAHAPP_QA_SETTINGS)
-
+		deploy($BLAHAPP_PROD_SETTINGS)
 		//sh 'echo "$BLAHAPP_PROD_SETTINGS"'
 		//sh 'echo "${BRANCH_NAME}"'
 		
