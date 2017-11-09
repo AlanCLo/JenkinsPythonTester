@@ -24,7 +24,7 @@ node {
 	}
 	stage ('QA') {
 		sh 'echo "$BLAHAPP_PROD_SETTINGS"'
-		sh 'echo "${env.BRANCH_NAME}"'
+		sh 'echo "${BRANCH_NAME}"'
 	}
 }
 
